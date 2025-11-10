@@ -243,13 +243,12 @@ try:
     cursor = connection.cursor()
     print(f"✅ تم الاتصال بقاعدة البيانات '{database}'")
 
-    # --- 3. [التعديل 1: تنظيف الجدول وإعادة ضبط العداد] ---
+    # --- 3. تنظيف الجدول ---
     print("...جارٍ تنظيف وإعادة ضبط 'sal_let_word'...")
-    cursor.execute("TRUNCATE TABLE sal_let_word") # <-- تم التغيير إلى TRUNCATE
+    cursor.execute("TRUNCATE TABLE sal_let_word") 
     connection.commit() 
     print("تم تنظيف الجدول وإعادة ضبط العداد إلى 1.")
-    # -----------------------------------------------
-
+    
     # --- 4. سحب قائمة الحروف الأصلية ---
     print("...جارٍ سحب الحروف من جدول Letters...")
     cursor.execute("SELECT LetterID, Letter FROM Letters")
@@ -268,31 +267,33 @@ try:
 
     # --- 6. تجهيز البيانات للدمج (التوافيق) ---
     data_to_insert = []
-    print("\n...جارٍ توليد التوافيق (البدء بالحرف الأصلي)...")
+    print("\n...جارٍ توليد التوافيق (البدء بحرف الزيادة)...")
     
     skipped_count = 0 
 
-    # --- [التعديل 2: التأكد أننا نبدأ بالحرف الأصلي] ---
-    # الحلقة الخارجية للحروف الأصلية
-    for letter_row in letters_list:
-        letter_id = letter_row.LetterID
-        letter_char = letter_row.Letter
+    # --- [التعديل 1: تم عكس الحلقات] ---
+    # الحلقة الخارجية أصبحت لحروف "سألتمونيها"
+    for salt_row in salt_list:
+        sal_id = salt_row.salId
+        sal_char = salt_row.sal_character
         
-        # الحلقة الداخلية لحروف "سألتمونيها"
-        for salt_row in salt_list:
-            sal_id = salt_row.salId
-            sal_char = salt_row.sal_character
+        # الحلقة الداخلية أصبحت للحروف الأصلية
+        for letter_row in letters_list:
+            letter_id = letter_row.LetterID
+            letter_char = letter_row.Letter
             
+            # منع التكرار (مثل 'ءء', 'مم')
             if letter_char == sal_char:
                 skipped_count += 1
                 continue 
+            # ------------------------------------
 
-            # الدمج الصحيح (أصلي + زيادة)
-            new_word = letter_char + sal_char  # (مثال: 'ب' + 'س' = 'بس')
+            # --- [التعديل 2: تم عكس الدمج] ---
+            new_word = sal_char + letter_char  # (مثال: 'س' + 'ب' = 'سب')
+            # ------------------------------------
             
-            # --- [التعديل 3: إضافة None للعامود الجديد (classification)] ---
-            data_to_insert.append( (letter_id, sal_id, new_word, None, None) ) # <-- أضفنا None خامس
-            # -----------------------------------------------------------
+            # (Letters_ID, sal_ID, word, have_mean, classification)
+            data_to_insert.append( (letter_id, sal_id, new_word, None, None) ) 
 
     print(f"تم توليد {len(data_to_insert)} كلمة جديدة.")
     print(f"(تم تجاهل {skipped_count} حالة تكرار)")
@@ -301,12 +302,11 @@ try:
     if data_to_insert:
         print("...جارٍ إدراج الكلمات في جدول sal_let_word...")
         
-        # --- [التعديل 4: تحديث جملة INSERT] ---
+        # الكود يستخدم 5 أعمدة، وهو متوافق مع الجدول الجديد
         insert_query = """
         INSERT INTO sal_let_word (Letters_ID, sal_ID, word, have_mean, classification) 
         VALUES (?, ?, ?, ?, ?)
         """
-        # ------------------------------------
         
         cursor.executemany(insert_query, data_to_insert)
         
@@ -320,7 +320,9 @@ try:
 except pyodbc.Error as ex:
     print(f"❌ حدث خطأ: {ex}")
     if connection:
+        print("...يتم التراجع عن أي تغييرات...")
         connection.rollback()
+        print("تم التراجع.")
 except Exception as e:
     print(f"❌ حدث خطأ غير متوقع في بايثون: {e}")
 
@@ -331,8 +333,7 @@ finally:
     if connection:
         connection.close()
         print("تم إغلاق الاتصال.")
-
-
+        
 #Combining two letters Start With Main_Letters!!!
 import pyodbc
 import sys
