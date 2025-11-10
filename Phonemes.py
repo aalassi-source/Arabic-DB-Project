@@ -65,7 +65,7 @@ while i < len(chars_to_process):
 
 print(arabic_saltomoniha)
 print(arabic_with_diacritics)
-
+print("GG")
 # #الاتصال بقاعدة البيانات!!!!
 
 # import pyodbc
