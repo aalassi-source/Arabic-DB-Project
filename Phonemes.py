@@ -1,70 +1,70 @@
-arabic_letters = [
-    'ا', 'ب', 'ت', 'ث', 'ج', 'ح', 'خ', 'د', 'ذ', 'ر', 'ز', 'س', 'ش',
-    'ص', 'ض', 'ط', 'ظ', 'ع', 'غ', 'ف', 'ق', 'ك', 'ل', 'م', 'ن', 'ه',
-    'و', 'ي', 'أ', 'إ', 'آ', 'ء', 'ؤ', 'ئ', 'ى', 'ة'
-]
+# arabic_letters = [
+#     'ا', 'ب', 'ت', 'ث', 'ج', 'ح', 'خ', 'د', 'ذ', 'ر', 'ز', 'س', 'ش',
+#     'ص', 'ض', 'ط', 'ظ', 'ع', 'غ', 'ف', 'ق', 'ك', 'ل', 'م', 'ن', 'ه',
+#     'و', 'ي', 'أ', 'إ', 'آ', 'ء', 'ؤ', 'ئ', 'ى', 'ة'
+# ]
 
-arabic_diacritics = [
-    'َ',  # فتحة
-    'ً',  # تنوين فتح
-    'ُ',  # ضمة
-    'ٌ',  # تنوين ضم
-    'ِ',  # كسرة
-    'ٍ',  # تنوين كسر
-    'ْ',  # سكون
-    'ّ'   # شدة
-]
+# arabic_diacritics = [
+#     'َ',  # فتحة
+#     'ً',  # تنوين فتح
+#     'ُ',  # ضمة
+#     'ٌ',  # تنوين ضم
+#     'ِ',  # كسرة
+#     'ٍ',  # تنوين كسر
+#     'ْ',  # سكون
+#     'ّ'   # شدة
+# ]
 
-# --- هذا الجزء يعمل بشكل سليم كما هو ---
-arabic_with_diacritics = []
-for letter in arabic_letters:
-    for diacritic in arabic_diacritics:
-        arabic_with_diacritics.append(letter + diacritic) 
+# # --- هذا الجزء يعمل بشكل سليم كما هو ---
+# arabic_with_diacritics = []
+# for letter in arabic_letters:
+#     for diacritic in arabic_diacritics:
+#         arabic_with_diacritics.append(letter + diacritic) 
         
-# print(arabic_with_diacritics)
+# # print(arabic_with_diacritics)
 
-# --- تصحيح المنطق المطلوب ---
+# # --- تصحيح المنطق المطلوب ---
 
-# 1. نحدد قائمة الحروف التي نريد معالجتها
-# (هذه هي الحروف التي كنت تحاول إضافتها في الكود الأصلي)
-chars_to_process = [
-    'سَ',  # من arabic_with_diacritics
-    'أَ',  # من arabic_with_diacritics
-    'لْ',  # من arabic_with_diacritics
-    'تُ',  # من arabic_with_diacritics
-    'مْ',  # من arabic_with_diacritics
-    'وْ',  # من arabic_with_diacritics
-    'نِ',  # من arabic_with_diacritics
-    'يْ',  # من arabic_with_diacritics
-    'هَ',  # من arabic_with_diacritics
-    'ا'   # من arabic_letters
-]
+# # 1. نحدد قائمة الحروف التي نريد معالجتها
+# # (هذه هي الحروف التي كنت تحاول إضافتها في الكود الأصلي)
+# chars_to_process = [
+#     'سَ',  # من arabic_with_diacritics
+#     'أَ',  # من arabic_with_diacritics
+#     'لْ',  # من arabic_with_diacritics
+#     'تُ',  # من arabic_with_diacritics
+#     'مْ',  # من arabic_with_diacritics
+#     'وْ',  # من arabic_with_diacritics
+#     'نِ',  # من arabic_with_diacritics
+#     'يْ',  # من arabic_with_diacritics
+#     'هَ',  # من arabic_with_diacritics
+#     'ا'   # من arabic_letters
+# ]
 
-arabic_saltomoniha = []
-i = 0
+# arabic_saltomoniha = []
+# i = 0
 
-# 2. نستخدم حلقة while لنتمكن من "تخطي" الحرف التالي إذا احتجنا
-while i < len(chars_to_process):
-    current_char = chars_to_process[i]
+# # 2. نستخدم حلقة while لنتمكن من "تخطي" الحرف التالي إذا احتجنا
+# while i < len(chars_to_process):
+#     current_char = chars_to_process[i]
     
-    # 3. هذا هو المنطق الذي طلبته
-    # إذا كان الحرف الحالي 'هَ'
-    if current_char == 'هَ':
-        # تحقق إذا كان هناك حرف تالٍ، وإذا كان 'ا'
-        if i + 1 < len(chars_to_process) and chars_to_process[i+1] == 'ا':
-            arabic_saltomoniha.append('هَا')  # ادمج الحرفين
-            i += 2  # تحرك خطوتين للأمام (تخطى 'هَ' و 'ا')
-        else:
-            # إذا لم يتبعه 'ا'، أضف 'هَ' فقط
-            arabic_saltomoniha.append(current_char)
-            i += 1
-    else:
-        # 4. باقي الحروف تبقى كما هي
-        arabic_saltomoniha.append(current_char)
-        i += 1  # تحرك خطوة واحدة للأمام
+#     # 3. هذا هو المنطق الذي طلبته
+#     # إذا كان الحرف الحالي 'هَ'
+#     if current_char == 'هَ':
+#         # تحقق إذا كان هناك حرف تالٍ، وإذا كان 'ا'
+#         if i + 1 < len(chars_to_process) and chars_to_process[i+1] == 'ا':
+#             arabic_saltomoniha.append('هَا')  # ادمج الحرفين
+#             i += 2  # تحرك خطوتين للأمام (تخطى 'هَ' و 'ا')
+#         else:
+#             # إذا لم يتبعه 'ا'، أضف 'هَ' فقط
+#             arabic_saltomoniha.append(current_char)
+#             i += 1
+#     else:
+#         # 4. باقي الحروف تبقى كما هي
+#         arabic_saltomoniha.append(current_char)
+#         i += 1  # تحرك خطوة واحدة للأمام
 
-print(arabic_saltomoniha)
-print(arabic_with_diacritics)
+# print(arabic_saltomoniha)
+# print(arabic_with_diacritics)
 
 # #الاتصال بقاعدة البيانات!!!!
 
@@ -219,219 +219,216 @@ print(arabic_with_diacritics)
 
 
 
-#Combining two letters Start With Extra letters!!!
-import pyodbc
-import sys
+# # #Combining two letters Start With Extra letters!!! (FIXED)
+# # # SCRIPT 2: (Extra + Main) -> 'سب'
+# # # Fills 'sal_let_word' table (the old one with 4 columns)
 
-# --- 1. معلومات الاتصال (كما هي) ---
-server = 'LAPTOP-QPC9F0C5'
-database = 'Arabic_Project'
+# # import pyodbc
+# # import sys
 
-connection_string = (
-    f'DRIVER={{ODBC Driver 17 for SQL Server}};'
-    f'SERVER={server};'
-    f'DATABASE={database};'
-    f'Trusted_Connection=yes;'
-)
+# # # --- 1. معلومات الاتصال ---
+# # server = 'LAPTOP-QPC9F0C5'
+# # database = 'Arabic_Project'
 
-connection = None
-cursor = None
+# # connection_string = (
+# #     f'DRIVER={{ODBC Driver 17 for SQL Server}};'
+# #     f'SERVER={server};'
+# #     f'DATABASE={database};'
+# #     f'Trusted_Connection=yes;'
+# # )
 
-try:
-    # --- 2. الاتصال ---
-    connection = pyodbc.connect(connection_string)
-    cursor = connection.cursor()
-    print(f"✅ تم الاتصال بقاعدة البيانات '{database}'")
+# # connection = None
+# # cursor = None
 
-    # --- 3. [التعديل 1: تنظيف الجدول وإعادة ضبط العداد] ---
-    print("...جارٍ تنظيف وإعادة ضبط 'sal_let_word'...")
-    cursor.execute("TRUNCATE TABLE sal_let_word") # <-- تم التغيير إلى TRUNCATE
-    connection.commit() 
-    print("تم تنظيف الجدول وإعادة ضبط العداد إلى 1.")
-    # -----------------------------------------------
+# # try:
+# #     # --- 2. الاتصال ---
+# #     connection = pyodbc.connect(connection_string)
+# #     cursor = connection.cursor()
+# #     print(f"✅ تم الاتصال بقاعدة البيانات '{database}'")
 
-    # --- 4. سحب قائمة الحروف الأصلية ---
-    print("...جارٍ سحب الحروف من جدول Letters...")
-    cursor.execute("SELECT LetterID, Letter FROM Letters")
-    letters_list = cursor.fetchall()
-    if not letters_list:
-        print("خطأ: جدول Letters فارغ. لا يمكن المتابعة.")
-        sys.exit()
-
-    # --- 5. سحب قائمة حروف "سألتمونيها" ---
-    print("...جارٍ سحب الحروف من جدول saltmuniha...")
-    cursor.execute("SELECT salId, sal_character FROM saltmuniha")
-    salt_list = cursor.fetchall()
-    if not salt_list:
-        print("خطأ: جدول saltmuniha فارغ. لا يمكن المتابعة.")
-        sys.exit()
-
-    # --- 6. تجهيز البيانات للدمج (التوافيق) ---
-    data_to_insert = []
-    print("\n...جارٍ توليد التوافيق (البدء بالحرف الأصلي)...")
+# #     # --- 3. تنظيف الجدول وإعادة ضبط العداد ---
+# #     print("...جارٍ تنظيف وإعادة ضبط 'sal_let_word'...")
+# #     cursor.execute("TRUNCATE TABLE sal_let_word") # <-- الجدول الصحيح
+# #     connection.commit() 
+# #     print("تم تنظيف الجدول (sal_let_word) وإعادة ضبط العداد إلى 1.")
     
-    skipped_count = 0 
+# #     # --- 4. سحب القوائم ---
+# #     print("...جارٍ سحب الحروف...")
+# #     cursor.execute("SELECT LetterID, Letter FROM Letters")
+# #     letters_list = cursor.fetchall()
+    
+# #     cursor.execute("SELECT salId, sal_character FROM saltmuniha")
+# #     salt_list = cursor.fetchall()
+    
+# #     if not letters_list or not salt_list:
+# #         print("خطأ: أحد الجداول (Letters أو saltmuniha) فارغ.")
+# #         sys.exit()
 
-    # --- [التعديل 2: التأكد أننا نبدأ بالحرف الأصلي] ---
-    # الحلقة الخارجية للحروف الأصلية
-    for letter_row in letters_list:
-        letter_id = letter_row.LetterID
-        letter_char = letter_row.Letter
+# #     # --- 5. تجهيز البيانات للدمج (التوافيق) ---
+# #     data_to_insert = []
+# #     print("\n...جارٍ توليد التوافيق (البدء بحرف الزيادة)...")
+    
+# #     skipped_count = 0 
+
+# #     # --- [التعديل 1: تم عكس الحلقات] ---
+# #     # الحلقة الخارجية أصبحت لحروف "سألتمونيها"
+# #     for salt_row in salt_list:
+# #         sal_id = salt_row.salId
+# #         sal_char = salt_row.sal_character
         
-        # الحلقة الداخلية لحروف "سألتمونيها"
-        for salt_row in salt_list:
-            sal_id = salt_row.salId
-            sal_char = salt_row.sal_character
+# #         # الحلقة الداخلية أصبحت للحروف الأصلية
+# #         for letter_row in letters_list:
+# #             letter_id = letter_row.LetterID
+# #             letter_char = letter_row.Letter
             
-            if letter_char == sal_char:
-                skipped_count += 1
-                continue 
+# #             if letter_char == sal_char:
+# #                 skipped_count += 1
+# #                 continue 
 
-            # الدمج الصحيح (أصلي + زيادة)
-            new_word = letter_char + sal_char  # (مثال: 'ب' + 'س' = 'بس')
+# #             # --- [التعديل 2: تم عكس الدمج] ---
+# #             new_word = sal_char + letter_char  # (مثال: 'س' + 'ب' = 'سب')
             
-            # --- [التعديل 3: إضافة None للعامود الجديد (classification)] ---
-            data_to_insert.append( (letter_id, sal_id, new_word, None, None) ) # <-- أضفنا None خامس
-            # -----------------------------------------------------------
+# #             # (Letters_ID, sal_ID, word, have_mean)
+# #             data_to_insert.append( (letter_id, sal_id, new_word, None) ) # 4 أعمدة فقط
 
-    print(f"تم توليد {len(data_to_insert)} كلمة جديدة.")
-    print(f"(تم تجاهل {skipped_count} حالة تكرار)")
+# #     print(f"تم توليد {len(data_to_insert)} كلمة جديدة.")
+# #     print(f"(تم تجاهل {skipped_count} حالة تكرار)")
 
-    # --- 7. تنفيذ الإدراج في قاعدة البيانات ---
-    if data_to_insert:
-        print("...جارٍ إدراج الكلمات في جدول sal_let_word...")
+# #     # --- 6. تنفيذ الإدراج في قاعدة البيانات ---
+# #     if data_to_insert:
+# #         print("...جارٍ إدراج الكلمات في جدول sal_let_word...")
         
-        # --- [التعديل 4: تحديث جملة INSERT] ---
-        insert_query = """
-        INSERT INTO sal_let_word (Letters_ID, sal_ID, word, have_mean, classification) 
-        VALUES (?, ?, ?, ?, ?)
-        """
-        # ------------------------------------
+# #         # جملة INSERT خاصة بالجدول القديم (4 أعمدة)
+# #         insert_query = """
+# #         INSERT INTO sal_let_word (Letters_ID, sal_ID, word, have_mean) 
+# #         VALUES (?, ?, ?, ?)
+# #         """
         
-        cursor.executemany(insert_query, data_to_insert)
+# #         cursor.executemany(insert_query, data_to_insert)
         
-        connection.commit()
+# #         connection.commit()
         
-        print(f"🎉 نجاح! تم إدراج {cursor.rowcount} صف جديد في 'sal_let_word'.")
+# #         print(f"🎉 نجاح! تم إدراج {cursor.rowcount} صف جديد في 'sal_let_word'.")
+
+# # except pyodbc.Error as ex:
+# #     print(f"❌ حدث خطأ: {ex}")
+# #     if connection:
+# #         connection.rollback()
+# # except Exception as e:
+# #     print(f"❌ حدث خطأ غير متوقع في بايثون: {e}")
+
+# # finally:
+# #     if cursor:
+# #         cursor.close()
+# #     if connection:
+# #         connection.close()
+# #         print("تم إغلاق الاتصال.")
+
+# # #Combining two letters Start With Main_Letters!!!
+# # import pyodbc
+# # import sys
+
+# # # --- 1. معلومات الاتصال ---
+# # server = 'LAPTOP-QPC9F0C5'
+# # database = 'Arabic_Project'
+
+# # connection_string = (
+# #     f'DRIVER={{ODBC Driver 17 for SQL Server}};'
+# #     f'SERVER={server};'
+# #     f'DATABASE={database};'
+# #     f'Trusted_Connection=yes;'
+# # )
+
+# # connection = None
+# # cursor = None
+
+# # try:
+# #     # --- 2. الاتصال ---
+# #     connection = pyodbc.connect(connection_string)
+# #     cursor = connection.cursor()
+# #     print(f"✅ تم الاتصال بقاعدة البيانات '{database}'")
+
+# #     # --- 3. [تعديل هام] تنظيف الجدول وإعادة ضبط العداد ---
+# #     print("...جارٍ تنظيف وإعادة ضبط 'let_sal_word'...")
+# #     cursor.execute("TRUNCATE TABLE let_sal_word") # <-- استخدمنا TRUNCATE بدلاً من DELETE
+# #     connection.commit() 
+# #     print("تم تنظيف الجدول وإعادة ضبط العداد إلى 1.")
+# #     # -----------------------------------------------
+
+# #     # --- 4. سحب قائمة الحروف الأصلية ---
+# #     print("...جارٍ سحب الحروف من جدول Letters...")
+# #     cursor.execute("SELECT LetterID, Letter FROM Letters")
+# #     letters_list = cursor.fetchall()
+# #     if not letters_list:
+# #         print("خطأ: جدول Letters فارغ. لا يمكن المتابعة.")
+# #         sys.exit()
+
+# #     # --- 5. سحب قائمة حروف "سألتمونيها" ---
+# #     print("...جارٍ سحب الحروف من جدول saltmuniha...")
+# #     cursor.execute("SELECT salId, sal_character FROM saltmuniha")
+# #     salt_list = cursor.fetchall()
+# #     if not salt_list:
+# #         print("خطأ: جدول saltmuniha فارغ. لا يمكن المتابعة.")
+# #         sys.exit()
+
+# #     # --- 6. تجهيز البيانات للدمج (التوافيق) ---
+# #     data_to_insert = []
+# #     print("\n...جارٍ توليد التوافيق (البدء بالحرف الأصلي)...")
     
-    else:
-        print("لم يتم العثور على بيانات لتوليد الكلمات.")
+# #     skipped_count = 0 
 
-except pyodbc.Error as ex:
-    print(f"❌ حدث خطأ: {ex}")
-    if connection:
-        connection.rollback()
-except Exception as e:
-    print(f"❌ حدث خطأ غير متوقع في بايثون: {e}")
-
-finally:
-    # --- 8. إغلاق الاتصال ---
-    if cursor:
-        cursor.close()
-    if connection:
-        connection.close()
-        print("تم إغلاق الاتصال.")
-
-
-#Combining two letters Start With Main_Letters!!!
-import pyodbc
-import sys
-
-# --- 1. معلومات الاتصال ---
-server = 'LAPTOP-QPC9F0C5'
-database = 'Arabic_Project'
-
-connection_string = (
-    f'DRIVER={{ODBC Driver 17 for SQL Server}};'
-    f'SERVER={server};'
-    f'DATABASE={database};'
-    f'Trusted_Connection=yes;'
-)
-
-connection = None
-cursor = None
-
-try:
-    # --- 2. الاتصال ---
-    connection = pyodbc.connect(connection_string)
-    cursor = connection.cursor()
-    print(f"✅ تم الاتصال بقاعدة البيانات '{database}'")
-
-    # --- 3. [تعديل هام] تنظيف الجدول وإعادة ضبط العداد ---
-    print("...جارٍ تنظيف وإعادة ضبط 'let_sal_word'...")
-    cursor.execute("TRUNCATE TABLE let_sal_word") # <-- استخدمنا TRUNCATE بدلاً من DELETE
-    connection.commit() 
-    print("تم تنظيف الجدول وإعادة ضبط العداد إلى 1.")
-    # -----------------------------------------------
-
-    # --- 4. سحب قائمة الحروف الأصلية ---
-    print("...جارٍ سحب الحروف من جدول Letters...")
-    cursor.execute("SELECT LetterID, Letter FROM Letters")
-    letters_list = cursor.fetchall()
-    if not letters_list:
-        print("خطأ: جدول Letters فارغ. لا يمكن المتابعة.")
-        sys.exit()
-
-    # --- 5. سحب قائمة حروف "سألتمونيها" ---
-    print("...جارٍ سحب الحروف من جدول saltmuniha...")
-    cursor.execute("SELECT salId, sal_character FROM saltmuniha")
-    salt_list = cursor.fetchall()
-    if not salt_list:
-        print("خطأ: جدول saltmuniha فارغ. لا يمكن المتابعة.")
-        sys.exit()
-
-    # --- 6. تجهيز البيانات للدمج (التوافيق) ---
-    data_to_insert = []
-    print("\n...جارٍ توليد التوافيق (البدء بالحرف الأصلي)...")
-    
-    skipped_count = 0 
-
-    for letter_row in letters_list:
-        letter_id = letter_row.LetterID
-        letter_char = letter_row.Letter
+# #     for letter_row in letters_list:
+# #         letter_id = letter_row.LetterID
+# #         letter_char = letter_row.Letter
         
-        for salt_row in salt_list:
-            sal_id = salt_row.salId
-            sal_char = salt_row.sal_character
+# #         for salt_row in salt_list:
+# #             sal_id = salt_row.salId
+# #             sal_char = salt_row.sal_character
             
-            if letter_char == sal_char:
-                skipped_count += 1
-                continue 
+# #             if letter_char == sal_char:
+# #                 skipped_count += 1
+# #                 continue 
 
-            new_word = letter_char + sal_char
-            data_to_insert.append( (letter_id, sal_id, new_word, None, None) ) 
+# #             new_word = letter_char + sal_char
+# #             data_to_insert.append( (letter_id, sal_id, new_word, None, None) ) 
 
-    print(f"تم توليد {len(data_to_insert)} كلمة جديدة.")
-    print(f"(تم تجاهل {skipped_count} حالة تكرار)")
+# #     print(f"تم توليد {len(data_to_insert)} كلمة جديدة.")
+# #     print(f"(تم تجاهل {skipped_count} حالة تكرار)")
 
-    # --- 7. تنفيذ الإدراج في قاعدة البيانات ---
-    if data_to_insert:
-        print("...جارٍ إدراج الكلمات في جدول let_sal_word...")
+# #     # --- 7. تنفيذ الإدراج في قاعدة البيانات ---
+# #     if data_to_insert:
+# #         print("...جارٍ إدراج الكلمات في جدول let_sal_word...")
         
-        insert_query = """
-        INSERT INTO let_sal_word (Letters_ID, sal_ID, word, have_mean, classification) 
-        VALUES (?, ?, ?, ?, ?)
-        """
+# #         insert_query = """
+# #         INSERT INTO let_sal_word (Letters_ID, sal_ID, word, have_mean, classification) 
+# #         VALUES (?, ?, ?, ?, ?)
+# #         """
         
-        cursor.executemany(insert_query, data_to_insert)
+# #         cursor.executemany(insert_query, data_to_insert)
         
-        connection.commit()
+# #         connection.commit()
         
-        print(f"🎉 نجاح! تم إدراج {cursor.rowcount} صف جديد (EntryID سيبدأ من 1).")
+# #         print(f"🎉 نجاح! تم إدراج {cursor.rowcount} صف جديد (EntryID سيبدأ من 1).")
     
-    else:
-        print("لم يتم العثور على بيانات لتوليد الكلمات.")
+# #     else:
+# #         print("لم يتم العثور على بيانات لتوليد الكلمات.")
 
-except pyodbc.Error as ex:
-    print(f"❌ حدث خطأ: {ex}")
-    if connection:
-        connection.rollback()
-except Exception as e:
-    print(f"❌ حدث خطأ غير متوقع في بايثون: {e}")
+# # except pyodbc.Error as ex:
+# #     print(f"❌ حدث خطأ: {ex}")
+# #     if connection:
+# #         connection.rollback()
+# # except Exception as e:
+# #     print(f"❌ حدث خطأ غير متوقع في بايثون: {e}")
 
-finally:
-    if cursor:
-        cursor.close()
-    if connection:
-        connection.close()
-        print("تم إغلاق الاتصال.")
+# # finally:
+# #     if cursor:
+# #         cursor.close()
+# #     if connection:
+# #         connection.close()
+# #         print("تم إغلاق الاتصال.")
+
+
+# create table Letters_With_Haraka
+
+
+#End
