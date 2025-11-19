@@ -106,7 +106,7 @@ def analyze_cv(word):
         i += 1
 
     return pattern
-
+#def
 def main():
     print("\nArabic Word CV Pattern Analyzer")
     print("Enter 'q' or press Ctrl+C to quit")
